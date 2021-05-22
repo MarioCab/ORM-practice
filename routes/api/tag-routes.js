@@ -3,7 +3,7 @@ const { Tag, Product, ProductTag } = require("../../models");
 
 // The `/api/tags` endpoint
 
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const Tags = await Tag.findAll();
     res.status(200).json(Tags);

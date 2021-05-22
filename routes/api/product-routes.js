@@ -5,7 +5,7 @@ const { Product, Category, Tag, ProductTag } = require("../../models");
 router.get("/", (req, res) => res.send("Products recieved"));
 
 // get all products
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const Products = await Product.findAll();
     res.status(200).json(Products);
