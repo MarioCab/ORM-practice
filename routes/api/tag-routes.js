@@ -2,26 +2,21 @@ const router = require("express").Router();
 const { Tag, Product, ProductTag } = require("../../models");
 
 // The `/api/tags` endpoint
-
 router.get("/", async (req, res) => {
-  try {
-    const Tags = await Tag.findAll();
-    res.status(200).json(Tags);
-  } catch (err) {
-    res.status(500).json(err);
-  }
+  Tag.findAll({
+    include: [Product],
+  })
+    .then((Tags) => res.status(200).json(Tags))
+    .catch((err) => res.status(500).json(err));
 });
 
-router.get("/:id", async (req, res) => {
-  try {
-    const Tags = await Tag.findbyPk(req.params.id);
-    if (!Tags) {
-      res.status(404).json({ message: "Tag not found" });
-    }
-    res.status(200).json(Tags);
-  } catch (err) {
-    res.status(500).json(err);
-  }
+router.get("/:id", (req, res) => {
+  Tag.findOne({
+    where: {
+      id: req.params.id,
+    },
+    include: [Product],
+  });
 });
 router.post("/", async (req, res) => {
   try {
@@ -34,10 +29,16 @@ router.post("/", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   try {
-    const Tags = await Tag.update(req.body);
+    const Tags = await Tag.update(req.body, {
+      where: { id: req.params.id },
+    });
+    if (!Tags) {
+      res.status(400).json;
+      return;
+    }
     res.status(200).json(Tags);
   } catch (err) {
-    res.status(400).json(err);
+    res.status(500).json(err);
   }
 });
 
