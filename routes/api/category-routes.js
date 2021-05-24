@@ -6,7 +6,7 @@ router.get("/", (req, res) => {
   Category.findAll({
     include: [Product],
   })
-    .then((Categories) => res.status(200).json(Categories))
+    .then((Categories) => res.json(Categories))
     .catch((err) => res.status(500).json(err));
 });
 
