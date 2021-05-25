@@ -2,19 +2,21 @@ const router = require("express").Router();
 const { Category, Product } = require("../../models");
 
 // The `/api/categories` endpoint
-
 router.get("/", (req, res) => {
   Category.findAll({
     include: [Product],
   })
-    .then((Categories) => res.status(200).json(Categories))
+    .then((Categories) => res.json(Categories))
     .catch((err) => res.status(500).json(err));
 });
 
 router.get("/:id", (req, res) => {
-  Category.findbyPk(req.params.id)
-    .then((Categories) => res.status(200).json(Categories))
-    .catch((err) => res.status(500).json(err));
+  Category.findOne({
+    where: {
+      id: req.params.id,
+    },
+    include: [Product],
+  });
 });
 
 router.post("/", async (req, res) => {
@@ -28,16 +30,22 @@ router.post("/", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   try {
-    const Categories = await Category.update(req.body);
+    const Categories = await Category.update(req.body, {
+      where: { id: req.params.id },
+    });
+    if (!Categories) {
+      res.status(400).json;
+      return;
+    }
     res.status(200).json(Categories);
   } catch (err) {
-    res.status(400).json(err);
+    res.status(500).json(err);
   }
 });
 
 router.delete("/:id", async (req, res) => {
   try {
-    const Categories = await Category.delete({
+    const Categories = await Category.destroy({
       where: { id: req.params.id },
     });
     if (!Categories) {
