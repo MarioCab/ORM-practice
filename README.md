@@ -20,9 +20,24 @@ Mario Cabrera
 
 ![badge](https://img.shields.io/badge/license-MIT-blue)
 
-## Tests
+## Examples
 
-(If you have run any tests for your peoject, list them here)
+Step 1: Create Database
+
+![ORM HW_ SourceEX](https://user-images.githubusercontent.com/77696841/119578599-d0bb3b80-bd8a-11eb-8828-2aac6c31d24f.gif)
+
+Step 2: Seed DB
+
+![ORM HW NPM RUn SEED](https://user-images.githubusercontent.com/77696841/119578634-e3ce0b80-bd8a-11eb-932d-a36cf2b1452a.gif)
+
+Step 3: Run Server
+
+![ORM HW NPM start](https://user-images.githubusercontent.com/77696841/119578683-f9433580-bd8a-11eb-8cb8-0b2033a855bd.gif)
+
+Step 4: Use Insomnia/Postman to see routes working live
+
+![ORM Hw Demo](https://user-images.githubusercontent.com/77696841/119578732-11b35000-bd8b-11eb-941d-cfd3113c415e.gif)
+
 
 ## Questions
 
